@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    // 创建全局组件 第一个参数是组件名,第二个参数是配置选项 options
+    Vue.component('Vbtn', {
+        template:'<button>按钮</button>'
+    });
+    // 局部入口组件创建
+    let Vcontent = {
+        template:'<div>我是内容组件<Vbtn/><Vbtn/><Vbtn/></div> '
+    };
+    let Vaside = {
+        template:'<div>我是侧边栏组件<Vbtn/></div> '
+    };
+    let Vheader = {
+        data(){
+            return {
+
+            }
+        },
+        template:'<div>我是头部组件</div> ',
+        methods:{
+
+        }
+    };
+
+    let App = {
+        data() {
+            return {};
+        },
+        components: {
+            Vheader,
+            Vaside,
+            Vcontent,
+        },
+        template: '<div><Vheader/><div><Vaside/><Vcontent/></div></div>'
+    };
+    let vm = new Vue({
+        el: "#app",
+        data() {
+            return {
+
+            }
+        },
+        // 父组件挂载子组件
+        components: {
+            App
+        },
+
+        template: '<App/>'
+    })
+</script>
+</body>
+</html>

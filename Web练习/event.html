@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event</title>
+    <style>
+        body {
+            margin: 20px;
+        }
+
+        img {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<img src="images/zeroblur.jpg" id="zero">
+<img id="one" src="images/oneblur.jpg">
+<img id="two" src="images/twoblur.jpg">
+<img id="three" src="images/threeblur.jpg">
+<img id="four" src="images/fourblur.jpg">
+<img id="five" src="images/fiveblur.jpg">
+</body>
+<script>
+    window.onload = init
+    function init() {
+        // 获取的是一个数组对象
+        let images = document.getElementsByTagName('img')
+        for (let i = 0; i < images.length; i++) {
+            // console.log(images[i].id)
+            images[i].onmouseover = showAnswer
+            images[i].onmouseout = reBlur
+            // images[i].onclick = showAnswer
+        }
+    }
+    function showAnswer(e) {
+        let image = e.target
+        console.log(image)
+        let name = image.id
+        name = 'images/' + name + '.jpg'
+        image.src = name
+        console.log(image.src)
+        // setTimeout(reBlur, 2000, image)
+    }
+    function reBlur(e) {
+        console.log(e.target)
+        let name = e.target.id
+        name = 'images/' + name + 'blur.jpg'
+        e.target.src = name
+    }
+</script>
+</html>

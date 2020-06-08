@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <input type="number" v-model="price">
+    <h2>{{price | myCurrent}}</h2>
+    <h3>{{info | myReverse}}</h3>
+</div>
+<script>
+    Vue.filter('myReverse', function (value) {
+            return value.split('').reverse().join('')
+    });
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                price: 0,
+                info:'hello'
+            }
+        },
+        filters: {
+            myCurrent: function (value) {
+                return "￥" + value
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

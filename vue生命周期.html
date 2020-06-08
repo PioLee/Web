@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+<div id="app">
+    <App></App>
+</div>
+<script type="text/javascript">
+    Vue.component('Test', {
+        data() {
+            return {
+                msg: 'hello world',
+            }
+        },
+        template: `
+            <div>
+                <div>{{msg}}</div>
+                <button @click="changeHandler">呃....</button>
+            </div>
+        `,
+        methods: {
+            changeHandler() {
+                this.msg = '尴尬'
+            }
+        },
+        beforeCreate: function () {
+            //组件创建之前
+            console.log(this.msg) // undefined
+        },
+        created: function () {
+            //组件创建之后 使用该组件，就会调用created方法
+            console.log(this.msg)
+        },
+        beforeMount: function () {
+            //数据挂载之前
+            console.log(document.getElementById('app'))
+        },
+        mounted: function () {
+            //数据挂载之后 应用:操作DOM
+            console.log(document.getElementById('app'))
+        },
+        beforeUpdate: function () {
+            //更新DOM之前
+        },
+        updated: function () {
+            //更新DOM之后
+        }
+    });
+    let App = {
+        data() {
+            return {
+                isShow: true
+            };
+        },
+        // vue内置组件<keep-alive>能将组件的切换状态保存在缓存中，防止重新渲染DOM，节省开销
+        // 启用该组件生命周期前几个函数都不会被调用了
+        template: `
+            <div class="app">
+                <keep-alive>
+                    <Test v-if="isShow"/>
+                    </keep-alive>
+                <button @click="isShow=!isShow">销毁</button>
+            </div>
+        `
+    };
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {}
+        },
+        // template: '<App/>',
+        components: {
+            // 挂载
+            App
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Don't resize me, I'm ticklish!</title>
+    <script>
+
+    </script>
+</head>
+<body>
+<p id="display">
+    Whatever you do, don't resize this window! I'm warning you!
+</p>
+<script>
+    let passengers = [{name: "Jane Doloop", paid: true, ticket: "coach"},
+        {name: "Dr. Evel", paid: true, ticket: "firstclass"},
+        {name: "Sue Property", paid: false, ticket: "firstclass"},
+        {name: "John Funcall", paid: true, ticket: "premium"}];
+    let onNoFlyList = ['Dr. Evel']
+
+    function checkNoFlyList(passenger) {
+        return onNoFlyList.indexOf(passenger.name) >= 0;
+    }
+
+    function checkNotPaid(passenger) {
+        return !passenger.paid
+    }
+
+    function processPassengers(passengers, func) {
+        for (let i = 0; i < passengers.length; i++) {
+            if (func(passengers[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // let allCanFly = processPassengers(passengers, checkNoFlyList);
+    // if (!allCanFly) {
+    //     console.log('The plane can\'t take off: we have a passenger on the no-fly-list')
+    // }
+    // let allPaid = processPassengers(passengers, checkNotPaid);
+    // if (!allPaid) {
+    //     console.log("The plane can't take off: not everyone has paid.");
+    // }
+    function printPassenger(passenger) {
+        if (passenger.paid) {
+            console.log(passenger.name + ' 买票了')
+        } else {
+            console.log(passenger.name + ' 没买票')
+        }
+    }
+
+    // processPassengers(passengers, printPassenger)
+    // console.log(allCanFly)
+    function serveCustomer(passenger) {
+        // let getDrinkOrderFunction = createDrinkOrder(passenger)
+        let getDrinkOrderFunction = createDinnerOrder(passenger)
+        getDrinkOrderFunction()
+    }
+
+    // 点饮料
+    function createDrinkOrder(passenger) {
+        let orderFunction;
+        if (passenger.ticket === 'firstclass') {
+            orderFunction = function () {
+                alert('你要喝鸡尾酒还是葡萄酒')
+            }
+        } else {
+            orderFunction = function () {
+                alert('你要喝白开还是可乐')
+            }
+        }
+        return orderFunction
+    }
+
+    // 点餐
+    function createDinnerOrder(passenger) {
+        let orderFunction;
+        if (passenger.ticket === 'premium') {
+            orderFunction = function () {
+                alert(passenger.name + '你要吃快餐还是芝士拼盘')
+            }
+
+        } else if (passenger.ticket === 'firstclass') {
+            orderFunction = function () {
+                alert(passenger.name + '你要吃鸡肉还是意大利面')
+            }
+
+        } else {
+            orderFunction = function () {
+                alert(passenger.name + '你要吃花生饼还是椒盐脆饼')
+            }
+
+        }
+        return orderFunction
+    }
+
+    function servePassengers(passengers) {
+        for (let i = 0; i < passengers.length; i++) {
+            serveCustomer(passengers[i])
+        }
+    }
+    servePassengers(passengers)
+</script>
+</body>
+</html>

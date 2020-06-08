@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function makeCounter() {
+        let num = 0
+
+        return function increment() {
+            return num += 1
+        }
+    }
+    let resp = makeCounter()
+    console.log(resp())
+    console.log(resp())
+    console.log(resp())
+    // 函数是返回一个值引用
+    function makePassword(password) {
+        let passwordGuess = 'hello'
+        return function checkPassword() {
+            return (passwordGuess === password);
+        };
+    }
+    // let onePassword = 'h'
+    // let twoPassword = 'hello'
+    // let res = makePassword(onePassword)
+    // console.log(res())
+    // let res2 = makePassword(twoPassword)
+    // console.log(res2())
+    function multN(n) {
+        return function result(m) {
+            return m * n
+        }
+    }
+    // let res = multN(3)
+    // console.log(res(6))
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript" src="node_modules/vue-router/dist/vue-router.js"></script>
+<div id="app"></div>
+<script>
+    // 组件
+    let UserParams = {
+        template: `
+            <div>用户1</div>
+        `,
+        created(){
+
+        }
+    };
+    let UserQuery = {
+        template: `
+            <div>用户2</div>
+        `
+    };
+    let Song = {
+        template:`
+            <div>我是音乐</div>
+        `
+    };
+    let Movie = {
+        template:`
+            <div>我是电影</div>
+        `
+    };
+    let Home = {
+        template:`
+            <div>
+                <p>首页内容</p>
+                <router-link to="/home/song">音乐</router-link>
+                <router-link to="/home/movie">电影</router-link>
+                <router-view></router-view>
+            </div>
+        `
+    }
+    // 路由对象
+    let router = new VueRouter({
+        // 匹配规则
+        routes: [
+            {
+                // path: '/user/:id',
+                // name:'userP',
+                // 组件
+                // component: UserParams,
+                path:'/home',
+                component: Home,
+                // 子路由
+                children:[
+                    {
+                        path:'song',
+                        component:Song,
+                    },
+                    {
+                        path:'movie',
+                        component:Movie,
+                    }
+                ]
+            },
+            // {
+            //     path: '/user',
+            //     name:'userQ',
+            //     component: UserQuery,
+            // },
+        ]
+    });
+    let App = {
+        // <router-link> == <a> to == href
+        // router-view 路由匹配组件出口 (它渲染的组件是你使用 vue-router 指定的)
+        // to绑定的是路由对象里的匹配规则
+        template: `
+            <div>
+<!--                <router-link :to="{name:'userP',params:{id:1}}">用户1</router-link>-->
+<!--                <router-link :to="{name:'userQ',query:{userId:2}}">用户2</router-link>-->
+                <router-link to="/home">首页</router-link>
+                <router-view></router-view>
+            </div>
+        `,
+    };
+    new Vue({
+        el: '#app',
+        data() {
+            return {}
+        },
+        components: {
+            App
+        },
+        // 使用路由
+        router,
+        template: '<App/>'
+    })
+</script>
+</body>
+</html>

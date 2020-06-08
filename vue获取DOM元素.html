@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app"></div>
+<script>
+    let App = {
+        data() {
+            return {};
+        },
+        components: {},
+        template: '<div class="app"><button ref="btn">我是按钮</button></div>',
+        created() {
+            console.log(this.$refs.btn)
+        }
+    };
+    new Vue({
+        el: "#app",
+        data() {
+            return {}
+        },
+        // 父组件挂载子组件
+        components: {
+            App
+        },
+
+        template: '<App/>'
+    })
+</script>
+</body>
+</html>

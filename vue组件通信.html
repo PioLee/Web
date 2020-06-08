@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    // 创建全局组件 第一个参数是组件名,第二个参数是配置选项 options
+    // 先给父组件定义属性
+    Vue.component('Parent', {
+        data() {
+            return {
+                msg:'我是父组件的数据',
+            };
+        },
+        template: '<div><p>我是一个父组件</p><Child :childData="msg" @childHandler="childHandler"/></div>',
+        methods:{
+            childHandler(val){
+                console.log(val)
+            }
+        }
+    });
+    Vue.component('Child', {
+        template: '<div><p>我是一个子组件</p><input type="text" v-model="childData" @input="changeValue(childData)"></div>',
+        props:['childData'],
+        methods: {
+            changeValue(val){
+                // 子组件往父组件传数据
+                this.$emit('ChildHandler', val)
+            }
+        }
+    });
+
+    let App = {
+        data() {
+            return {};
+        },
+        components: {},
+        template: '<div><Parent/></div>'
+    };
+    let vm = new Vue({
+        el: "#app",
+        data() {
+            return {}
+        },
+        // 父组件挂载子组件
+        components: {
+            App
+        },
+
+        template: '<App/>'
+    })
+</script>
+</body>
+</html>

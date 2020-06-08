@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Click me!</title>
+    <style>
+        body, button {
+            margin: 10px;
+        }
+
+        div {
+            padding: 10px;
+        }
+    </style>
+    <script>
+        // 闭包,创建的变量都是局部变量
+        // window.onload = function () {
+        //     let count = 0
+        //     let button = document.getElementById('clickme')
+        //     let div = document.getElementById('message')
+        //     button.onclick = function () {
+        //         count += 1
+        //         div.innerHTML = '你点击了我' + count + '次'
+        //     }
+        // }
+        (function (food) {
+            if (food === "cookies") {
+                alert("More please");
+            } else if (food === "cake") {
+                alert("Yum yum");
+            }
+        })("cookies");
+        let eat = function (food) {
+            if (food === "cookies") {
+                alert("More please");
+            } else if (food === "cake") {
+                alert("Yum yum");
+            }
+        }
+        eat('cookies')
+
+    </script>
+</head>
+<body>
+<button id="clickme">Click me!</button>
+<div id="message"></div>
+</body>
+</html>
+</body>
+</html>

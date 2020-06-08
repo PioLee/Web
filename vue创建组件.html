@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    // 局部入口组件创建
+    let App = {
+        data() {
+            return {
+
+            };
+        },
+        template: '<div><button type="button" value="哈哈"></button></div>'
+    };
+    let vm = new Vue({
+        el:"#app",
+        data(){
+            return{
+
+            }
+        },
+        components:{
+            App
+        },
+        // 父组件挂载子组件
+        template:'<App/>'
+    })
+</script>
+</body>
+</html>

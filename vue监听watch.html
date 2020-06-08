@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <!--点击按钮重新给name赋值-->
+    <button @click="stus[0].name='henry'">改变</button>
+    <h4>{{stus[0].name}}</h4>
+</div>
+<script>
+    // watch监听基本数据类型是简单监视，复杂的需要深度监视
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                stus: [{name: 'ai'}]
+            }
+        },
+        watch: {
+            stus: {
+                deep: true,
+                handler: function (nv, ov) {
+                    console.log(nv[0].name)
+                }
+            }
+        },
+    })
+</script>
+</body>
+
+</html>

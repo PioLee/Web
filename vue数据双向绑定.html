@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--v-model双向数据绑定 只能应用在有value的标签下 监听输入值-->
+    <!--视图改变数据，数据又改变视图-->
+    <input type="text" v-model="msg">
+    <h3>{{msg}}</h3>
+    <!--实现相同效果-->
+    <input type="text" v-bind:value="msg" v-on:input="getValue">
+    <h3>{{msg}}</h3>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                msg: '🐂🖊',
+
+            }
+        },
+        methods:{
+            getValue(e){
+                // console.log(e.target);
+                this.msg=e.target.value;
+            }
+        },
+        // 入口组件
+        // template:'<div></div>'
+    })
+</script>
+</body>
+</html>
